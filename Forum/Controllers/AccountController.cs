@@ -73,7 +73,7 @@ namespace Forum.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -114,10 +114,27 @@ namespace Forum.Controllers
                 return View(model);
             }
 
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
+            //if (ModelState.IsValid)
+            //{
+            //    var user = await UserManager.FindAsync(model.Username, model.Password);
+            //    if (user != null)
+            //    {
+            //        if (user.EmailConfirmed == true)
+            //        {
+            //            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+            //            return RedirectToLocal(returnUrl);
+            //        }
+            //        else
+            //        {
+            //            ModelState.AddModelError("", "Не подтвержден email.");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ModelState.AddModelError("", "Неверный логин или пароль");
+            //    }
+            //}
+            //return View(model);
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -155,8 +172,7 @@ namespace Forum.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
+                  
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");

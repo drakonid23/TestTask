@@ -7,16 +7,20 @@
 
 @using (Html.BeginForm("AddTheme", "Home"))
 {
-    <div class="row">
+<div class="container-fluid">
+    <div class="row" id="firstRow">
         <div class="col-xs-12 text-center">
-            <input type="text" name="themeName" />
+            <input type="text" name="themeName" placeholder="Theme description" id="themeName" />
         </div>
     </div>
-    <div class="row">
+    <div class="row">       
         <div class="col-xs-12 text-center">
-            <textarea type="text" name="questionDescription"></textarea>>
+            <textarea type="text" name="questionDescription" class="themeDes"></textarea>
+            <input type="hidden" name="creator" value="@User.Identity.GetUserName()"/>
+            <div>
+                <input type="submit" class="btn btn-info" />
+            </div>
         </div>
-        <input type="hidden" name="creator" value="@User.Identity.GetUserName()"/>
-        <input type="submit" class="btn btn-info" />
     </div>
+</div>
 }

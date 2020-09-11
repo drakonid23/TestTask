@@ -8,9 +8,12 @@ namespace Forum.Controllers
 {
     public class HomeController : Controller
     {
+        //Контекст базы данных
         CommentsContext cm = new CommentsContext();
+        
         public ActionResult Index()
         {
+            //Загрузка уже созданных тем в базе данных
             IEnumerable<ForumTheme> themes = cm.forumThemes;
 
             ViewBag.ForumThemes = themes;

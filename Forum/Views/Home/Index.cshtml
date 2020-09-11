@@ -11,16 +11,18 @@
 <div class="row">
     <div class="container">
         
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
 
             @foreach (var ft in ViewBag.ForumThemes)
             {
-                <div class="row">
-                    <div class="col-md-3">@ft.creator</div>
-                    <div class="col-md-9">
-                        <p><a href="/Home/Theme/@ft.Id">@ft.themeName</a></p>
-                        <p>@ft.questionDescription</p>
-                        <p>@ft.themeDate</p>
+                <div class="row forumSign bg-info">
+                    <div class="col-md-3 ">
+                        <p class="text-center">@ft.creator</p>
+                    </div>
+                    <div class="col-md-9 text-center">
+                            <p class="text-center"><a href="/Home/Theme/@ft.Id">@ft.themeName - @ft.themeDate</a></p>
+                            <p class="text-center">@ft.questionDescription</p>
+                            
                     </div>
                 </div>
             }
