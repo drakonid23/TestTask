@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "NewTheme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNet.Identity
+
+@using (Html.BeginForm("AddTheme", "Home"))
+{
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <input type="text" name="themeName" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <textarea type="text" name="questionDescription"></textarea>>
+        </div>
+        <input type="hidden" name="creator" value="@User.Identity.GetUserName()"/>
+        <input type="submit" class="btn btn-info" />
+    </div>
+}

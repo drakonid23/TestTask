@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="container">
+        
+        <div class="col-md-12">
+
+            @foreach (var ft in ViewBag.ForumThemes)
+            {
+                <div class="row">
+                    <div class="col-md-3">@ft.creator</div>
+                    <div class="col-md-9">
+                        <p><a href="/Home/Theme/@ft.Id">@ft.themeName</a></p>
+                        <p>@ft.questionDescription</p>
+                        <p>@ft.themeDate</p>
+                    </div>
+                </div>
+            }
+            @if (Request.IsAuthenticated)
+            {
+                <a href="Home/AddTheme" class="btn btn-info">Создать новую тему</a>
+
+            }
+        </div>
+        </div>
+    </div>
